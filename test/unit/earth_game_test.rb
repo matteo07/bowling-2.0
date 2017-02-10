@@ -1,13 +1,12 @@
 require_relative '../test_case'
+require_relative '../../lib/tasks/earth_game'
 
-class BowlingTest < Test::Unit::TestCase
+class EarthGameTest < Test::Unit::TestCase
 
-  def setup
-    @bowling = Bowling.new
-    @bowling.start_game
+  setup do
+    @game = EarthGame.new
     @shots = []
   end
-
 
   def test_all_zeros
     20.times do
@@ -52,23 +51,9 @@ class BowlingTest < Test::Unit::TestCase
   private
 
   def check_score(score)
-    @bowling.play @shots
-    assert_equal score, @bowling.get_score
+    @game.play @shots
+    assert_equal score, @game.get_score
   end
 
-  def check_martian_score(score)
-    @bowling.set_martian
-    check_score score
-  end
-
-  def check_callisto_score(score)
-    @bowling.set_callisto
-    check_score score
-  end
-
-  def check_venus_score(score)
-    @bowling.set_venusian
-    check_score score
-  end
 
 end
