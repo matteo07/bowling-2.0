@@ -1,10 +1,11 @@
 require_relative '../test_case'
-require_relative '../../lib/tasks/earth_game'
+require_relative '../../lib/tasks/divide_shots'
+require_relative '../../lib/tasks/game'
 
 class VenusGameTest < Test::Unit::TestCase
 
   setup do
-    @game = EarthGame.new
+    @game = Game.new
     @shots = []
   end
 
@@ -24,18 +25,18 @@ class VenusGameTest < Test::Unit::TestCase
     check_score(9)
   end
 
-  # def test_venus_mars_spare_and_call
-  #   @shots = [ 0,0,0   ,0,0,0   ,1,1,1    ,3,0,0   ,0,0,0   ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0   ,0,0,0   ,14,14,14,14,14 ]
-  #   @bowling.set_martian
-  #   @bowling.set_callisto
-  #   check_venus_score(79)
-  # end
-  #
-  # def test_venus_strike_and_callisto
-  #   @shots = [0,0   ,0,0    ,3   , 2,1    ,0,0    , 0,0   , 0,0   ,0,0   ,0,0   ,10,10,10,10,10]
-  #   @bowling.set_callisto
-  #   check_venus_score(59)
-  # end
+  def test_venus_mars_spare_and_call
+    @shots = [ 0,0,0   ,0,0,0   ,1,1,1    ,3,0,0   ,0,0,0   ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0  ,0,0,0   ,0,0,0   ,14,14,14,14,14 ]
+    @game = MarsGame.new
+    @game.set_callisto
+    check_score(79)
+  end
+
+  def test_venus_strike_and_callisto
+    @shots = [0,0   ,0,0    ,3   , 2,1    ,0,0    , 0,0   , 0,0   ,0,0   ,0,0   ,10,10,10,10,10]
+    @game.set_callisto
+    check_score(59)
+  end
 
   private
 

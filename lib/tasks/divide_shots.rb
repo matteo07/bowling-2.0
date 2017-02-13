@@ -8,15 +8,9 @@ class DivideShots
   end
 
   def divide_list_in_frames(list)
-    p 'tot pinss ' + @context.total_pins.to_s
-    p 'venus ' + @context.venusian_rule?.to_s
-    p 'tot framess ' + @context.total_frames.to_s
-
     @total_pins = @context.total_pins
     @total_frames = @context.total_frames
-
     @is_venusian_rule = @context.venusian_rule?
-
 
     if @context.instance_of? MarsGame
       divide_list_in_frames_mars(list)
@@ -26,7 +20,6 @@ class DivideShots
   end
 
   def divide_list_in_frames_earth(list)
-
     res = []
     i = 0
     frames_count = 0

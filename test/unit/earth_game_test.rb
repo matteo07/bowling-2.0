@@ -1,10 +1,11 @@
 require_relative '../test_case'
-require_relative '../../lib/tasks/earth_game'
+require_relative '../../lib/tasks/divide_shots'
+require_relative '../../lib/tasks/game'
 
-class EarthGameTest < Test::Unit::TestCase
+class GameTest < Test::Unit::TestCase
 
   setup do
-    @game = EarthGame.new
+    @game = Game.new
     @shots = []
   end
 

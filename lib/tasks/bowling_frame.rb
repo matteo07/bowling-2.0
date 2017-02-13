@@ -2,6 +2,7 @@ class BowlingFrame
 
   @@is_strike = false
   @@is_spare = false
+  @@is_callisto = false
   
   def initialize(shots,total_pins)
     @shots = shots
@@ -18,16 +19,15 @@ class BowlingFrame
   end
 
   def shoot_last
-    #if @is_callisto
-    #  shoot_last_frame_callisto frame
-    #else
+    if @@is_callisto
+      shoot_last_frame_callisto
+    else
       shoot_last_frame @shots[0], @shots[1], @shots[2] || 0, @shots[3] || 0
-    #end
+    end
   end
 
   def shoot_frame(first, second, third)
     res = 0
-    check_shot first, second
     @first_shot = first
     @second_shot = second
     res += shoot_first first
@@ -53,15 +53,17 @@ class BowlingFrame
     res
   end
 
-  def shoot_last_frame_callisto(list)
+  def shoot_last_frame_callisto
     i = 0
-    while i < list.size do
-      @score += list[i]
+    res = 0
+    while i < @shots.size do
+      res += @shots[i]
       i += 1
       if @@is_spare && i == 0
-        @score += list[i]
+        @score += @shots[i]
       end
     end
+    res
   end
 
   def shoot_first(first)
@@ -76,11 +78,13 @@ class BowlingFrame
   def shoot_second(second)
     res = 0
     res += second
+
     if @first_shot + second == @total_pins
       @@is_spare = true
     else
       @@is_spare = false
     end
+
     if @@is_strike
       res += second
     end
@@ -90,11 +94,13 @@ class BowlingFrame
   def shoot_third(third)
     res = 0
     res += third
+
     if @first_shot + @second_shot + third == @total_pins
       @@is_spare = true
     else
       @@is_spare = false
     end
+
     if @@is_strike
       res += third
       @@is_strike = false
@@ -102,22 +108,14 @@ class BowlingFrame
     res
   end
 
+  def self.set_callisto
+    @@is_callisto = true
+  end
+
   private
 
   def strike?
     @shots.length == 1
-  end
-
-  def check_shot(first, second, third = 0)
-    if first > @total_pins
-      raise 'first shot over ' + @total_pins.to_s
-    elsif second > @total_pins
-      raise 'second shot over ' + @total_pins.to_s
-    elsif third > @total_pins
-      raise 'third shot over ' + @total_pins.to_s
-    elsif first + second + third > @total_pins
-      raise 'sum of shots over ' + @total_pins.to_s
-    end
   end
 
 end

@@ -1,5 +1,4 @@
-require_relative 'game.rb'
-require_relative 'divide_shots.rb'
+require_relative '../../lib/tasks/game'
 
 class MarsGame < Game
 

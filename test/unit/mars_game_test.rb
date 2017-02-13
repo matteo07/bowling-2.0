@@ -30,5 +30,4 @@ class MarsGameTest < Test::Unit::TestCase
     assert_equal score, @game.get_score
   end
 
-
 end
