@@ -6,6 +6,7 @@ class BowlingFrame
   def initialize(shots,total_pins)
     @shots = shots
     @total_pins = total_pins
+    #p 'created ' + @shots.to_s + ' ' + @total_pins.to_s
   end
   
   def shoot

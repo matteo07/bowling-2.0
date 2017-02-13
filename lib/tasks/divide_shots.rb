@@ -8,6 +8,16 @@ class DivideShots
   end
 
   def divide_list_in_frames(list)
+    p 'tot pinss ' + @context.total_pins.to_s
+    p 'venus ' + @context.venusian_rule?.to_s
+    p 'tot framess ' + @context.total_frames.to_s
+
+    @total_pins = @context.total_pins
+    @total_frames = @context.total_frames
+
+    @is_venusian_rule = @context.venusian_rule?
+
+
     if @context.instance_of? MarsGame
       divide_list_in_frames_mars(list)
     else
@@ -16,8 +26,6 @@ class DivideShots
   end
 
   def divide_list_in_frames_earth(list)
-    @total_frames = @context.total_frames
-    @total_pins = @context.total_pins
 
     res = []
     i = 0
@@ -39,15 +47,12 @@ class DivideShots
           i += 2
         end
       end
-      #increase_pins_if_venus
+      increase_pins_if_venus
     end
     res
   end
 
   def divide_list_in_frames_mars(list)
-    @total_frames = @context.total_frames
-    @total_pins = @context.total_pins
-
     res = []
     i = 0
     frames_count = 0
@@ -71,7 +76,7 @@ class DivideShots
           i += 3
         end
       end
-      #increase_pins_if_venus
+      increase_pins_if_venus
     end
     res
   end
@@ -83,9 +88,9 @@ class DivideShots
       i += 1
     end
     frames << BowlingFrame.new(last_frame, @total_pins)
-    #reset_pins_number
+    reset_pins_number
   end
-=begin
+
   def reset_pins_number
     if @is_venusian_rule
       @total_pins = 1
@@ -97,7 +102,6 @@ class DivideShots
       @total_pins += 1
     end
   end
-=end
 
   def is_strike(shot)
     shot == @total_pins
