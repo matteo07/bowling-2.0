@@ -8,7 +8,6 @@ class DivideShots
 
   def divide_list_in_frames(list)
     @total_pins = @context.total_pins
-    @total_frames = @context.total_frames
     @is_venusian_rule = @context.venusian_rule?
 
     divide_list_in_frames_earth(list)
@@ -17,7 +16,7 @@ class DivideShots
 
   def divide_list_in_frames_earth(list)
     list_cursor = frames_count =0
-    while frames_count < @total_frames - 1 do
+    while frames_count < @context.total_frames - 1 do
       frames_count += 1
       if @context.instance_of? MarsGame
         list_cursor += divide_mars(list_cursor, list)
@@ -30,27 +29,37 @@ class DivideShots
     reset_pins_number
   end
 
-  def divide_earth(i, list)
-    if is_strike(list[i])
-      @frames_list << BowlingFrame.new([list[i]], @total_pins)
+  def divide_earth(list_cursor, list)
+    if is_strike(list[list_cursor])
+      append_shots(list_cursor, list, 1)
       1
     else
-      @frames_list << BowlingFrame.new([list[i], list[i + 1]], @total_pins)
+      append_shots(list_cursor, list, 2)
       2
     end
   end
 
-  def divide_mars(i, list)
-    if is_strike(list[i])
-      @frames_list << BowlingFrame.new([list[i]], @total_pins)
+  def divide_mars(list_cursor, list)
+    if is_strike(list[list_cursor])
+      append_shots(list_cursor, list, 1)
       1
-    elsif is_strike(list[i] + list[i + 1])
-      @frames_list << BowlingFrame.new([list[i], list[i + 1]], @total_pins)
+    elsif is_strike(list[list_cursor] + list[list_cursor + 1])
+      append_shots(list_cursor, list, 2)
       2
     else
-      @frames_list << BowlingFrame.new([list[i], list[i + 1], list[i + 2]], @total_pins)
+      append_shots(list_cursor, list, 3)
       3
     end
+  end
+
+  def append_shots(list_curosr, list, n_to_append)
+    frame = []
+    j = 0
+    while j < n_to_append
+      frame << list[list_curosr + j]
+      j += 1
+    end
+    @frames_list << BowlingFrame.new(frame, @total_pins)
   end
 
   def reset_pins_number

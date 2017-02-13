@@ -3,7 +3,6 @@ require_relative '../../lib/tasks/divide_shots'
 require_relative '../../lib/tasks/game'
 
 class VenusGameTest < Test::Unit::TestCase
-
   setup do
     @game = Game.new
     @shots = []
@@ -43,6 +42,4 @@ class VenusGameTest < Test::Unit::TestCase
     @game.play @shots
     assert_equal score, @game.get_score
   end
-
-
 end
