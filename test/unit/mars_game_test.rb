@@ -2,7 +2,6 @@ require_relative '../test_case'
 require_relative '../../lib/tasks/mars_game'
 
 class MarsGameTest < Test::Unit::TestCase
-
   setup do
     @game = MarsGame.new
     @shots = []
@@ -29,5 +28,4 @@ class MarsGameTest < Test::Unit::TestCase
     @game.play @shots
     assert_equal score, @game.get_score
   end
-
 end

@@ -20,7 +20,6 @@ class BowlingFrame
   def shoot_frame
     res = @@is_strike ? (frame_total) * 2 : frame_total
     res += @@is_spare ? @shots[0] : 0
-
     if @@is_strike
       @@is_strike = false
     end
