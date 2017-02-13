@@ -6,7 +6,6 @@ class CallistoTest < Test::Unit::TestCase
 
   setup do
     @game = Game.new
-    @game.set_callisto
     @shots = []
   end
 

@@ -7,7 +7,6 @@ class Game
     @score = 0
     @total_pins = 10
     @total_frames = 10
-
     @is_venusian_rule = false
   end
 
@@ -17,19 +16,10 @@ class Game
   end
 
   def shoot_all_frames(frames)
-    frames.each_with_index do |frame, i|
-      if i != frames.length - 1
+    frames.each do |frame|
         @score += frame.shoot
-      else #last frame
-        @score += frame.shoot_last
-      end
     end
   end
-
-  def set_callisto
-    BowlingFrame.set_callisto
-  end
-
 
   # ---------------------------------------------- VENUS RULE ----------------------------------------------
 

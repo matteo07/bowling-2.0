@@ -27,7 +27,8 @@ class DivideShots
       frames_count += 1
       #ultimo frame aggiungi tutti quelli mancanti
       if frames_count == @total_frames
-        set_last_frame(i, list, res)
+        res << BowlingFrame.new(list.last(list.length - i),@total_pins)
+        reset_pins_number
         break
       else
         #strike al primo colpo
@@ -53,7 +54,8 @@ class DivideShots
       frames_count += 1
       #ultimo frame aggiungi tutti quelli mancanti
       if frames_count == @total_frames
-        set_last_frame(i, list, res)
+        res << BowlingFrame.new(list.last(list.length - i),@total_pins)
+        reset_pins_number
         break
       else
         #strike al primo colpo
@@ -72,16 +74,6 @@ class DivideShots
       increase_pins_if_venus
     end
     res
-  end
-
-  def set_last_frame(i, list, frames)
-    last_frame = []
-    while i < list.size do
-      last_frame << list[i]
-      i += 1
-    end
-    frames << BowlingFrame.new(last_frame, @total_pins)
-    reset_pins_number
   end
 
   def reset_pins_number
