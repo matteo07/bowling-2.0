@@ -23,7 +23,7 @@ class BowlingFrame
     if @@is_strike
       @@is_strike = false
     end
-    @@is_spare = (frame_total == @total_pins) ? true : false
+    @@is_spare = (frame_total == @total_pins)
     res
   end
 
